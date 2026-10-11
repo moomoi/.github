@@ -12,10 +12,6 @@ ARROW = '<path d="M5 12h14m0 0-6-6m6 6-6 6" fill="none" stroke="{c}" stroke-widt
 BUTTONS = [
     ('mac', 'Download for Mac', 'go', DOWN),
     ('windows', 'Download for Windows', 'go', DOWN),
-    ('site', 'moo.moi', 'ghost', ARROW),
-    ('docs', 'Docs', 'ghost', ARROW),
-    ('marketplace', 'Marketplace', 'ghost', ARROW),
-    ('plugin', 'Write a plugin', 'ghost', ARROW),
 ]
 GLOW = 14  # room round a gradient pill for its glow; a glass pill needs only a hairline's
 

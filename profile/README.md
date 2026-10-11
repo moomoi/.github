@@ -5,10 +5,11 @@
 <a href="https://github.com/moomoi/moo/releases/latest/download/Moo-macos-universal.dmg"><img src="assets/buttons/mac.svg" alt="Download for Mac"></a>
 <a href="https://github.com/moomoi/moo/releases"><img src="assets/buttons/windows.svg" alt="Download for Windows"></a>
 <br>
-<a href="https://moo.moi"><picture><source media="(prefers-color-scheme: light)" srcset="assets/buttons/site-light.svg"><img src="assets/buttons/site-dark.svg" alt="moo.moi"></picture></a>
-<a href="https://moo.moi/docs"><picture><source media="(prefers-color-scheme: light)" srcset="assets/buttons/docs-light.svg"><img src="assets/buttons/docs-dark.svg" alt="Docs"></picture></a>
-<a href="https://moo.moi/marketplace"><picture><source media="(prefers-color-scheme: light)" srcset="assets/buttons/marketplace-light.svg"><img src="assets/buttons/marketplace-dark.svg" alt="Marketplace"></picture></a>
-<a href="https://moo.moi/docs/first-plugin"><picture><source media="(prefers-color-scheme: light)" srcset="assets/buttons/plugin-light.svg"><img src="assets/buttons/plugin-dark.svg" alt="Write a plugin"></picture></a>
+
+**[moo.moi](https://moo.moi)** ·
+**[Docs](https://moo.moi/docs)** ·
+**[Marketplace](https://moo.moi/marketplace)** ·
+**[Write a plugin](https://moo.moi/docs/first-plugin)**
 
 </div>
 
