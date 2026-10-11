@@ -1,0 +1,18 @@
+#!/bin/sh
+# Render templates to looping animated WebPs for the profile README.
+#   scripts/render.sh hero [features …]   → ../profile/assets/<name>.webp
+# Needs the PopCraft app running (APP_URL, default http://localhost:3137), ffmpeg and img2webp.
+set -e
+cd "$(dirname "$0")/.."
+FPS=${FPS:-24}
+for name in "$@"; do
+  id="moomoi-$name"
+  ./pc.sh template build "templates/$name.ts" >/dev/null
+  frame=$(node scripts/inline.mjs "build/$id" | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>console.log(JSON.parse(s)[0].id))')
+  out="frames/$name"; rm -rf "$out"
+  node scripts/seq-export.mjs "build/$id/$id.inline.popcraft" "$frame" "$out" | tail -1
+  mkdir -p "$out/s"
+  ffmpeg -nostdin -loglevel error -y -framerate 30 -i "$out/f_%05d.png" -vf "fps=$FPS,scale=${WIDTH:-1280}:-2:flags=lanczos" "$out/s/f_%04d.png"
+  img2webp -loop 0 -lossy -q "${Q:-72}" -m 6 -d $((1000 / FPS)) "$out"/s/f_*.png -o "../profile/assets/$name.webp" >/dev/null
+  echo "$name: $(du -h "../profile/assets/$name.webp" | cut -f1)"
+done
