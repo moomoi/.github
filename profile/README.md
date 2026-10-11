@@ -44,7 +44,7 @@ Or **[download the Mac app](https://github.com/moomoi/moo/releases/latest/downlo
 
 ## 📦 Repositories
 
-| | |
+| Repository | What's in it |
 | --- | --- |
 | **[moo](https://github.com/moomoi/moo)** | The app: source, releases and developer docs |
 | **[plugins](https://github.com/moomoi/plugins)** | The official plugins, the plugin SDK and `@moo/ui` |
