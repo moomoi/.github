@@ -13,6 +13,8 @@ for name in "$@"; do
   node scripts/seq-export.mjs "build/$id/$id.inline.popcraft" "$frame" "$out" | tail -1
   mkdir -p "$out/s"
   ffmpeg -nostdin -loglevel error -y -framerate 30 -i "$out/f_%05d.png" -vf "fps=$FPS,scale=${WIDTH:-1280}:-2:flags=lanczos" "$out/s/f_%04d.png"
-  img2webp -loop 0 -lossy -q "${Q:-72}" -m 6 -d $((1000 / FPS)) "$out"/s/f_*.png -o "../profile/assets/$name.webp" >/dev/null
+  # A keyframe every KMAX frames: lossy frames stored as changed rectangles otherwise pile up their errors
+  # (smeared bands round anything that moves, like the hero's icon).
+  img2webp -loop 0 -kmin $((${KMAX:-6} - 1)) -kmax "${KMAX:-6}" -lossy -q "${Q:-72}" -m 6 -d $((1000 / FPS)) "$out"/s/f_*.png -o "../profile/assets/$name.webp" >/dev/null
   echo "$name: $(du -h "../profile/assets/$name.webp" | cut -f1)"
 done
