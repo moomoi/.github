@@ -12,6 +12,8 @@ import { media } from '@popcraft/kit'
 import { mooBrand, ICON, W as SW } from '../shared/brand.ts'
 
 const DUR = 8000
+// Shorter than github-social: the buttons sit right under it in the README.
+const H = 540
 const QUERIES: [string, string, string][] = [
   ['12% of 3400', '408', 'Calculator'],
   ['5 mi in km', '8.05 km', 'Unit Converter'],
@@ -30,7 +32,7 @@ export default defineTemplate({
     created: '2026-10-10', updated: '2026-10-10',
   },
   build() {
-    const k = new Kit('Moo profile hero', preset('github-social'))
+    const k = new Kit('Moo profile hero', { ...preset('github-social'), height: H })
     mooBrand(k)
     k.textStyle('Wordmark', { size: 150, fontWeight: 900, letterSpacing: -7, lineHeight: 150 })
     k.textStyle('Tagline', { size: 31, fontWeight: 700, letterSpacing: -0.6, lineHeight: 42 })
@@ -51,10 +53,10 @@ export default defineTemplate({
 
     // The sky: two coloured lights that breathe, and a dot grid fading toward the bottom.
     const pink = glow(k, sheet, { x: 260, y: 120, w: 900, role: 'g1', alpha: 0.32, name: 'Pink light' })
-    const blue = glow(k, sheet, { x: 1060, y: 560, w: 1000, role: 'g2', alpha: 0.3, name: 'Blue light' })
+    const blue = glow(k, sheet, { x: 1060, y: 480, w: 1000, role: 'g2', alpha: 0.3, name: 'Blue light' })
     k.behave(pink, 'opacity', [{ kind: 'sine', amp: 0.18, freq: 1 / (DUR / 1000) }])
     k.behave(blue, 'opacity', [{ kind: 'sine', amp: 0.18, freq: 1 / (DUR / 1000), phase: 0.5 }])
-    k.vector(sheet, SW, 640, dotPaths(SW, 640, 28, 1.2), 'line', { name: 'Dots', opacity: 0.9, absolute: { x: 0, y: 0 } })
+    k.vector(sheet, SW, H, dotPaths(SW, H, 28, 1.2), 'line', { name: 'Dots', opacity: 0.9, absolute: { x: 0, y: 0 } })
 
     // Left: the cow, the wordmark and what Moo is.
     const left = k.stack(sheet, { gap: 18, width: 540, name: 'Brand', absolute: { x: 72, y: 70 } })
@@ -66,14 +68,9 @@ export default defineTemplate({
     k.patch(mark, { fills: [k.gradient({ from: 'g1', to: 'g2', kind: 'LINEAR', angle: 0 })] })
     k.text(left, 'One hotkey. Then type anything.', { style: 'Tagline', color: 'text', width: 'FILL', name: 'Tagline' })
     k.text(left, 'A fast, native launcher: apps, files, answers, clipboard, windows, Ask AI and plugins in one search field.', { style: 'Lead', color: 'dim', width: 'FILL', name: 'Lead' })
-    const chips = k.stack(left, { direction: 'HORIZONTAL', gap: 10, width: 'HUG', name: 'Chips' })
-    for (const c of ['macOS', 'Windows', 'built with Tish']) {
-      const chip = k.stack(chips, { direction: 'HORIZONTAL', width: 'HUG', radius: 999, padding: { top: 7, right: 14, bottom: 7, left: 14 }, fill: 'glass2', stroke: { color: 'line', width: 1 }, name: 'Chip' })
-      k.text(chip, c, { style: 'Chip', color: 'text', autoWidth: true })
-    }
 
     // Right: the launcher panel, answering.
-    const PX = 648, PY = 122, PW = 560
+    const PX = 648, PY = 70, PW = 560
     const panel = k.stack(sheet, { width: PW, height: 'HUG', radius: 26, fill: 'panel', stroke: { color: 'edge', width: 1.5 }, clip: true, effects: [blackShadow(0.6, 30, 80)], name: 'Launcher', absolute: { x: PX, y: PY } })
     const head = k.stack(panel, { direction: 'HORIZONTAL', gap: 16, align: 'CENTER', width: 'FILL', height: 76, padding: { top: 0, right: 24, bottom: 0, left: 24 }, name: 'Field' })
     k.picture(head, media(ICON), 30, 30, { name: 'Field icon', radius: 8, fit: 'FILL' })
