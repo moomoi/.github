@@ -17,7 +17,7 @@ BUTTONS = [
     ('marketplace', 'Marketplace', 'ghost', ARROW),
     ('plugin', 'Write a plugin', 'ghost', ARROW),
 ]
-PAD = 14  # room round the pill for its glow
+GLOW = 14  # room round a gradient pill for its glow; a glass pill needs only a hairline's
 
 
 def width(label: str) -> int:
@@ -26,8 +26,9 @@ def width(label: str) -> int:
 
 
 def svg(label: str, style: str, icon: str, theme: str) -> str:
+    PAD = GLOW if style == 'go' else 2
     w, h = width(label), 48
-    W, H = w + 2 * PAD, h + 2 * PAD + 6
+    W, H = w + 2 * PAD, h + 2 * PAD + (6 if style == 'go' else 0)
     if style == 'go':
         fg = '#FFFFFF'
         defs = ('<linearGradient id="g" x1="0" y1="0" x2="1" y2="0.36"><stop offset="0" stop-color="#FE588A"/>'
